@@ -21,7 +21,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "showThumbnail":
         thumbnail = await db.get_thumbnail(cb.from_user.id)
         if not thumbnail:
-            await cb.answer("You didn't set any custom thumbnail!", show_alert=True)
+            await cb.answer("Kamu belum menyetel thumbnail!", show_alert=True)
         else:
             await cb.answer()
             await c.send_photo(cb.message.chat.id, thumbnail, "Custom Thumbnail",
@@ -31,12 +31,11 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                ]]))
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
-        await cb.answer("Okay, I deleted your custom thumbnail. Now I will apply default thumbnail.", show_alert=True)
+        await cb.answer("Okay, kustom thumbnailmu sudah terhapus. Thumbnail default sudah terpasang.", show_alert=True)
         await cb.message.delete(True)
     elif cb.data == "setThumbnail":
         await cb.answer()
-        await cb.message.edit("Send me any photo to set that as custom thumbnail.\n\n"
-                              "Press /cancel to cancel process.")
+        await cb.message.edit("Tekan /cancel untuk membatalkan.")
         from_user_thumb: "types.Message" = await c.listen(cb.message.chat.id)
         if not from_user_thumb.photo:
             await cb.message.edit("Process Cancelled!")
