@@ -32,8 +32,8 @@ async def video_info_handler(c: Client, m: Message):
     await add_user_to_database(c, m)
     if filesystem_free() < 5000000000:
         return await m.reply_text(
-            "Karena ruang server yang lebih sedikit, saya tidak dapat melakukan tugas ini sekarang!!\n\n"
-            "Please try again after some time or use @AHToolsBot to do same task.",
+            "Server Sedang Penuh!\n\n"
+            "Coba Lagi Nanti.",
             True
         )
     if (not m.reply_to_message) or (len(m.command) == 1):
